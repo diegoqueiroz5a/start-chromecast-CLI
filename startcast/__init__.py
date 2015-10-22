@@ -5,8 +5,15 @@ def main():
     import pychromecast
     import sys
     
-    if sys.argv[1] == "--help":
-        print "Usage: startcast CHROMECAST_FRIENDLY_NAME APP_ID"
+    if len(sys.argv) == 1 or sys.argv[1] == "--help":
+        print "Usage: startcast [-l] [--help] [CHROMECAST_FRIENDLY_NAME] [APP_ID]"
+        print "  -l                               show list of available chromeasts"
+        print "  --help                           show help text"
+        print "  CHROMECAST_FRIENDLY_NAME APP_ID  play APPID on a named chromecast"
+        exit(0)
+
+    if sys.argv[1] == "-l":
+        print "\n".join(pychromecast.get_chromecasts_as_dict().keys())
         exit(0)
         
     try:
